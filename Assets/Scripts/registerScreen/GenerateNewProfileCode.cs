@@ -1,10 +1,13 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class GenerateNewProfileCode : MonoBehaviour
 {
-
-    string Name, Age, School;
+    [SerializeField]
+    TMP_InputField[] personalInformationInputFields;
+    public string code;
 
     static int GenerateCode(string[] PersonalInformation)
     {
@@ -12,7 +15,7 @@ public class GenerateNewProfileCode : MonoBehaviour
 
         Array.ForEach(PersonalInformation, piece => ConcatenatedString += piece);
 
-        return Encipher(ConcatenatedString).GetHashCode();
+        return Math.Abs(Encipher(ConcatenatedString).GetHashCode());
     }
 
     static char Cipher(char ch)
@@ -33,5 +36,12 @@ public class GenerateNewProfileCode : MonoBehaviour
             Output += Cipher(ch);
 
         return Output;
+    }
+
+    public void GetCode()
+    {
+        string[] information = new string[3];
+        Array.ForEach(personalInformationInputFields, field => information.Append(field.text));
+        code = GenerateCode(information).ToString();
     }
 }
