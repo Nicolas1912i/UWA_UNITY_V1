@@ -1,25 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateControls : MonoBehaviour
 {
-    private Touch touch;
-    private Vector2 oldTouchPosition;
-    private Vector2 NewTouchPosition;
+    Touch touch;
+    Vector2 oldTouchPosition, NewTouchPosition;
     [SerializeField]
-    private float keepRotateSpeed = 10f;
+    float keepRotateSpeed = 1f;
 
     [SerializeField]
-    private float deltaThreshold = 5f;
+    float deltaThreshold = 1f;
 
 
-    private void Update()
+    void Update()
     {
         RotateThings();
     } 
 
-    private void RotateThings()
+    void RotateThings()
     {
         if (Input.touchCount > 0)
         {
@@ -37,30 +34,19 @@ public class RotateControls : MonoBehaviour
             }
 
             float delta = Mathf.Abs(oldTouchPosition.x - NewTouchPosition.x);
-            if (/*touch.phase != TouchPhase.Stationary &&*/ delta >= deltaThreshold)
+            if (delta >= deltaThreshold)
             {
                 Vector2 rotDirection = oldTouchPosition - NewTouchPosition;
-                Debug.Log(delta);
                 if (rotDirection.x < 0)
-                {
                     RotateRight();
-                }
 
                 else if (rotDirection.x > 0)
-                {
                     RotateLeft();
-                }
             }
         }
     }
 
-    void RotateLeft()
-    {
-        transform.rotation = Quaternion.Euler(0f, 1.5f * keepRotateSpeed, 0f) * transform.rotation;
-    }
+    void RotateLeft() { transform.rotation = Quaternion.Euler(0f, 1.5f * keepRotateSpeed, 0f) * transform.rotation; }
 
-    void RotateRight()
-    {
-        transform.rotation = Quaternion.Euler(0f, -1.5f * keepRotateSpeed, 0f) * transform.rotation;
-    }
+    void RotateRight() { transform.rotation = Quaternion.Euler(0f, -1.5f * keepRotateSpeed, 0f) * transform.rotation; }
 }
