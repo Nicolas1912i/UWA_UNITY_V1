@@ -1,9 +1,31 @@
 using UnityEngine;
+using System.Collections;
 
-public class SolarSystemMotion : MonoBehaviour
+namespace SolarSystemHub
 {
-    void FixedUpdate()
+    public class SolarSystemMotion : MonoBehaviour
     {
-        transform.Rotate(0, 50 * Time.deltaTime, 0);
+        RotateControls controls;
+
+        private void Start()
+        {
+            controls = GetComponent<RotateControls>();
+        }
+        void FixedUpdate() { 
+            if (controls.rotating)
+            {
+                StopAllCoroutines();
+            }
+            else
+            {
+                StartCoroutine(Rotate());
+            }
+        }
+
+        public IEnumerator Rotate()
+        {
+            transform.Rotate(0, 50 * Time.deltaTime, 0);
+            yield return null;
+        }
     }
 }

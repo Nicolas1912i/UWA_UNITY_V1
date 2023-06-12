@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class PlanetTexturer : MonoBehaviour
+namespace SolarSystemHub
 {
-    [SerializeField] private Texture2D[] frames;
-    [SerializeField] private float fps = 1.0f;
-
-    private Material mat;
-
-    void Start()
+    public class PlanetTexturer : MonoBehaviour
     {
-        mat = GetComponent<Renderer>().material;
-    }
+        [SerializeField] private Texture2D[] frames;
+        [SerializeField] private float fps = 1.0f;
 
-    void Update()
-    {
-        int index = (int)(Time.time * fps);
-        index = index % frames.Length;
-        mat.mainTexture = frames[index];
+        private Material mat;
+
+        void Start()
+        {
+            mat = GetComponent<Renderer>().material;
+        }
+
+        void Update()
+        {
+            int index = (int)(Time.time * fps);
+            index = index % frames.Length;
+            mat.mainTexture = frames[index];
+        }
     }
 }
