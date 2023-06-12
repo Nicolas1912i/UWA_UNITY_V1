@@ -13,13 +13,9 @@ namespace SolarSystemHub
         }
         void FixedUpdate() { 
             if (controls.rotating)
-            {
                 StopAllCoroutines();
-            }
             else
-            {
                 StartCoroutine(Rotate());
-            }
         }
 
         public IEnumerator Rotate()

@@ -5,24 +5,20 @@ using TMPro;
 
 public class GenerateNewProfileCode : MonoBehaviour
 {
-    [SerializeField]
-    TMP_InputField[] personalInformationInputFields;
-    public string code;
+    [SerializeField] TMP_InputField[] personalInformationInputFields;
+    [HideInInspector] public string code;
 
-    static int GenerateCode(string[] PersonalInformation)
+    static int GenerateCode(string[] personalInformation)
     {
-        string ConcatenatedString = string.Empty;
-
-        Array.ForEach(PersonalInformation, piece => ConcatenatedString += piece);
-
-        return Math.Abs(Encipher(ConcatenatedString).GetHashCode());
+        string concatenatedString = string.Empty;
+        Array.ForEach(personalInformation, piece => concatenatedString += piece);
+        return Math.Abs(Encipher(concatenatedString).GetHashCode());
     }
 
     static char Cipher(char ch)
     {
         if (!char.IsLetter(ch))
             return ch;
-
         char k = char.IsUpper(ch) ? 'A' : 'a';
         return (char)((((ch + 5) - k) % 26) + k);
     }
@@ -30,12 +26,10 @@ public class GenerateNewProfileCode : MonoBehaviour
 
     static string Encipher(string Text)
     {
-        string Output = string.Empty;
-
+        string output = string.Empty;
         foreach (char ch in Text)
-            Output += Cipher(ch);
-
-        return Output;
+            output += Cipher(ch);
+        return output;
     }
 
     public void GetCode()

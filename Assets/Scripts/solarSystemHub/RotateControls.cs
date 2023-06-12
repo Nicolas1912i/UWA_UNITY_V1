@@ -6,14 +6,9 @@ namespace SolarSystemHub
     {
         Touch touch;
         Vector2 oldTouchPosition, NewTouchPosition;
-        [SerializeField]
-        float keepRotateSpeed = 1f;
-
-        [SerializeField]
-        float deltaThreshold = 1f;
-
-        [HideInInspector]
-        public bool rotating = false;
+        [SerializeField] float keepRotateSpeed = 1f;
+        [SerializeField]float deltaThreshold = 1f;
+        [HideInInspector] public bool rotating = false;
 
         void Update() { RotateThings(); }
 
@@ -30,10 +25,7 @@ namespace SolarSystemHub
                 {
                     oldTouchPosition = touch.position;
                     NewTouchPosition = touch.position;
-                }
-
-                else if (touch.phase == TouchPhase.Moved)
-                {
+                } else if (touch.phase == TouchPhase.Moved) {
                     oldTouchPosition = NewTouchPosition;
                     NewTouchPosition = touch.position;
                 }
@@ -44,12 +36,10 @@ namespace SolarSystemHub
                     Vector2 rotDirection = oldTouchPosition - NewTouchPosition;
                     if (rotDirection.x < 0)
                         RotateRight();
-
                     else if (rotDirection.x > 0)
                         RotateLeft();
                 }
-            }
-            else { rotating = false; }
+            } else { rotating = false; }
         }
     }
 }

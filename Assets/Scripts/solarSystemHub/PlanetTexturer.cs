@@ -6,7 +6,6 @@ namespace SolarSystemHub
     {
         [SerializeField] private Texture2D[] frames;
         [SerializeField] private float fps = 1.0f;
-
         private Material mat;
 
         void Start()
